@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stupid Questions Game</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif; /* Times New Roman font */
+            font-style: italic; /* Italic style */
+            text-align: center;
+            background-color: #E0B0FF; /* Mauve color */
+            padding: 20px;
+            color: black; /* Black text color */
+        }
+        h1 {
+            font-size: 2.5em;
+        }
+        .question {
+            margin: 20px 0;
+            font-size: 1.5em;
+        }
+        input {
+            padding: 10px;
+            font-size: 1em;
+            width: 80%;
+            max-width: 400px;
+            border: 2px solid #4B0082; /* Indigo border */
+            border-radius: 5px;
+            font-family: 'Times New Roman', Times, serif; /* Times New Roman font */
+            font-style: italic; /* Italic style */
+            color: black; /* Black text color */
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            margin-top: 20px;
+            cursor: pointer;
+            background-color: #9370DB; /* Medium purple */
+            color: black; /* Black text color */
+            border: none;
+            border-radius: 5px;
+            font-family: 'Times New Roman', Times, serif; /* Times New Roman font */
+            font-style: italic; /* Italic style */
+        }
+        button:hover {
+            background-color: #7B68EE; /* Lighter purple on hover */
+        }
+        .result {
+            font-size: 1.5em;
+            margin-top: 30px;
+            color: black; /* Black text color */
+            font-weight: bold;
+            font-family: 'Times New Roman', Times, serif; /* Times New Roman font */
+            font-style: italic; /* Italic style */
+        }
+    </style>
+</head>
+<body>
+    <h1>Stupid Questions Game</h1>
+    <div id="game">
+        <div class="question" id="question"></div>
+        <input type="text" id="answer" placeholder="Enter your answer here...">
+        <button onclick="checkAnswer()">Next</button>
+    </div>
+    <div class="result" id="result"></div>
+
+    <script>
+        // Questions and answers
+        const questions = [
+            { question: "What color is the wind?", answer: "invisible" },
+            { question: "How does the water taste?", answer: "wet" },
+            { question: "What sound does crema make?", answer: "sizzle" },
+            { question: "What flavor does time have?", answer: "eternity" },
+            { question: "How do secrets taste on the tongue?", answer: "whisper" },
+            { question: "What does the night dream about?", answer: "stars" },
+            { question: "What flavor does a goodbye have?", answer: "bittersweet" },
+            { question: "What kind of footsteps does time leave behind?", answer: "echoes" },
+            { question: "How does the sun feel when no one is awake to see it?", answer: "lonely" },
+            { question: "What color is the pause before an answer?", answer: "silence" },
+            { question: "How much qantora is in Shebien L qanater?", answer: "42 qantoras" },
+            { question: "How old is Masr L 2adima?", answer: "7000 years and a nap" }
+        ];
+
+        let currentQuestionIndex = 0;
+        const questionElement = document.getElementById("question");
+        const answerElement = document.getElementById("answer");
+        const resultElement = document.getElementById("result");
+
+        // Display the first question
+        function showQuestion() {
+            questionElement.textContent = questions[currentQuestionIndex].question;
+        }
+
+        // Check the user's answer
+        function checkAnswer() {
+            const userAnswer = answerElement.value.trim().toLowerCase();
+            const correctAnswer = questions[currentQuestionIndex].answer.toLowerCase();
+
+            if (userAnswer === correctAnswer || userAnswer === "stupid") {
+                resultElement.textContent = "Stupid answer! You're stupid!";
+            } else {
+                resultElement.textContent = "Wrong answer! You're still stupid!";
+            }
+
+            // Move to the next question
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                showQuestion();
+                answerElement.value = ""; // Clear the answer input
+            } else {
+                resultElement.textContent += " No more questions! You're officially stupid!";
+                document.getElementById("game").style.display = "none"; // Hide the game
+            }
+        }
+
+        // Start the game
+        showQuestion();
+    </script>
+</body>
+</html>
